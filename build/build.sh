@@ -35,6 +35,7 @@ bash ./configure --with-boot-jdk="$SCRIPTDIR/jdk-9.0.4" \
                  --with-freetype-include=/usr/include \
                  --with-jvm-variants=client \
                  --with-extra-cflags="-w -Wno-error -D__SOFTFP__" \
+                 --with-extra-cxxflags="-w -Wno-error -D__SOFTFP__" \
                  --with-version-string="$JAVA_VERSION" \
                  AR="arm-linux-gnueabi-gcc-ar" \
                  NM="arm-linux-gnueabi-gcc-nm" \
