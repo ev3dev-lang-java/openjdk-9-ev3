@@ -23,10 +23,10 @@ diff -Naur a/hotspot/src/os/linux/vm/os_linux.cpp b/hotspot/src/os/linux/vm/os_l
 -#if defined(AMD64) || (defined(_LP64) && defined(SPARC)) || defined(PPC64) || defined(S390)
 -  #define DEFAULT_LIBPATH "/usr/lib64:/lib64:/lib:/usr/lib"
 +#ifdef DEB_MULTIARCH
-+#define DEFAULT_LIBPATH	"/usr/lib/" DEB_MULTIARCH "/jni" ":/lib/" DEB_MULTIARCH ":/usr/lib/" DEB_MULTIARCH ":/usr/lib/jni:/lib:/usr/lib"
++#define DEFAULT_LIBPATH	"/home/robot/java/natives:/usr/lib/" DEB_MULTIARCH "/jni" ":/lib/" DEB_MULTIARCH ":/usr/lib/" DEB_MULTIARCH ":/usr/lib/jni:/lib:/usr/lib"
  #else
 -  #define DEFAULT_LIBPATH "/lib:/usr/lib"
-+  #define DEFAULT_LIBPATH "/usr/lib/jni:/lib:/usr/lib"
++  #define DEFAULT_LIBPATH "/home/robot/java/natives:/usr/lib/jni:/lib:/usr/lib"
  #endif
  
  // Base path of extensions installed on the system.
