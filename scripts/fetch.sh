@@ -6,75 +6,10 @@ source config.sh
 
 if [ ! -d "$JDKDIR" ]; then
 
-  #################
-  # HG zip method #
-  #################
-  if [ "$JAVA_SCM" == "hg_zip" ]; then
-    cd "$BUILDDIR"
-
-    # Identify latest HG tag
-    # select URL for latest tag in given repo
-    if [ "$JDKVER" == "tip" ]; then
-      JAVA_TAG="$(wget -nv "$HG_BASE_URL/raw-file/tip/.hgtags" -O - | cut -d " " -f2 | \
-                      sort -V | grep -v -- '-ga' | tail -n1)"
-      JAVA_DST="tip.tar.bz2"
-      SUFFIX="ev3-unstable"
-    else
-      JAVA_TAG="$(wget -nv "$HG_BASE_URL/raw-file/tip/.hgtags" -O - | cut -d " " -f2 | \
-                      sort -V | grep -B1 -- '-ga' | tail -n2 | head -n1)"
-      JAVA_DST="$JAVA_TAG.tar.bz2"
-      SUFFIX="ev3"
-    fi
-    JAVA_URL="$HG_BASE_URL/archive/$JAVA_DST"
-
-    # download it
-    echo "[FETCH] Downloading Java tarball from Mercurial (tag $JAVA_TAG)"
-
-    set +e
-    wget -nv -N "$JAVA_URL"
-    status=$?
-    tries=1
-    while [[ "$status" -ne "0" ]]; do
-
-      if [[ "$tries" -gt "$TARBALL_MAX_DOWNLOADS" ]]; then
-        echo "$TARBALL_MAX_DOWNLOADS download failed, giving up." 1>&2
-        exit 1
-      fi
-
-      wget -nv -N "$JAVA_URL"
-      status=$?
-      tries=$(($tries+1))
-    done
-    set -e
-
-    # extract
-    echo "[FETCH] Extracting tarball"
-    mkdir "$JAVA_TMP"
-    tar -C "$JAVA_TMP" -xf "$JAVA_DST"
-
-    # move to the right place
-    # https://unix.stackexchange.com/a/156287
-    pattern="$JAVA_TMP/*"
-    files=( $pattern )
-    mv "${files[0]}" "$JDKDIR"
-    rmdir "$JAVA_TMP"
-
-    # enter the jdk repo
-    cd "$JDKDIR"
-
-    # clone the rest of the tree, if needed
-    if [ -f "./get_source.sh" ]; then
-      echo "[FETCH] Downloading Java components"
-      bash ./get_source.sh
-    fi
-
-    JAVA_VERSION="$(echo "$JAVA_TAG" | sed -E "s/^.*jdk-//")-$SUFFIX"
-    JAVA_COMMIT="$(cat ./.hg_archival.txt | grep "node:" | sed -E 's/^node: //')"
-
   #####################
   # Git mirror method #
   #####################
-  elif [ "$JAVA_SCM" == "git" ]; then
+  if [ "$JAVA_SCM" == "git" ]; then
     cd "$BUILDDIR"
 
     # Identify latest Git tag
