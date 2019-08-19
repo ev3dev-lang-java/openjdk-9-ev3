@@ -41,8 +41,11 @@ PKG="jri-${DEB_JRI_MAJOR}-${DEB_JRI_PLATFORM}"
 PKGVER="${DEB_JRI_MAJOR}.${DEB_JRI_MINOR}.${DEB_JRI_PATCH}~${DEB_JRI_BUILD}"
 PKGNAME="${PKG}_${PKGVER}"
 DATE=$(LC_ALL=C date -R)
-if [ ! -z "$DISTRO" ]; then
-    DISTRO=stable
+if [ -z "$DISTRO" ]; then
+    echo "Please choose a target distro." >&2
+    exit 1
+else
+    echo "Building for ev3dev-$DISTRO"
 fi
 
 PKGDIR="/build/pkg/$PKGNAME"

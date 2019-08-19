@@ -1,6 +1,9 @@
 ARG DEBIAN_RELEASE=stretch
 FROM ev3dev/ev3dev-$DEBIAN_RELEASE-ev3-base
 
+ARG DEBIAN_RELEASE
+ENV DISTRO=$DEBIAN_RELEASE
+
 # copy QEMU
 COPY qemu-arm-static /usr/bin/qemu-arm-static
 
