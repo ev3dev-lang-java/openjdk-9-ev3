@@ -249,7 +249,12 @@ elif [ "$JDKVER" == "13" ]; then
     HOSTJDK="$BUILDDIR/jdk-ev3"
     HOSTJDK_RENAME_FROM="$BUILDDIR/jdk"
     HOSTJDK_FILE="$BUILDDIR/jdk-ev3.tar.gz"
-    HOSTJDK_URL="https://ci.adoptopenjdk.net/view/ev3dev/job/openjdk12_build_ev3_linux_native/lastSuccessfulBuild/artifact/build/jdk-ev3.tar.gz"
+    # stretch and buster have different versions
+    if [ "$BUILDER_DISTRO" = "stretch" ]; then
+      HOSTJDK_URL="https://ci.adoptopenjdk.net/view/ev3dev/job/openjdk12_build_ev3_linux_native/lastSuccessfulBuild/artifact/build/jdk-ev3.tar.gz"
+    else
+      HOSTJDK_URL="https://ci.adoptopenjdk.net/view/ev3dev/job/openjdk12_build_ev3_linux_native_next/lastSuccessfulBuild/artifact/build/jdk-ev3.tar.gz"
+    fi
   else
     HOSTJDK="$BUILDDIR/jdk-12+33"
     HOSTJDK_FILE="$BUILDDIR/OpenJDK12U-jdk_x64_linux_hotspot_12_33.tar.gz"
