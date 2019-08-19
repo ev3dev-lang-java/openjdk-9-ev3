@@ -12,18 +12,43 @@ if [ ! -d "$JDKDIR" ]; then
   if [ "$JAVA_SCM" == "git" ]; then
     cd "$BUILDDIR"
 
-    # Identify latest Git tag
-    # select git clone target
-    if [ "$JDKVER" == "tip" ]; then
-      JAVA_TAG="$(git ls-remote --ref "$JAVA_REPO" | cut -f2 | grep 'refs/tags/' | sed 's|refs/tags/||' | \
-                      sort -V | grep -v -- '-ga' | tail -n1)"
-      JAVA_TARGET="master"
-      SUFFIX="ev3-unstable"
-    else
-      JAVA_TAG="$(git ls-remote --ref "$JAVA_REPO" | cut -f2 | grep 'refs/tags/' | sed 's|refs/tags/||' | \
-                      sort -V | grep -B1 -- '-ga' | tail -n2 | head -n1)"
+    # Identify latest Git target:
+
+    # * GA model: use latest -ga tag (proper release)
+    if [ "$VERSION_POLICY" == "latest_general_availability" ]; then
+      JAVA_TAG="$( git ls-remote --ref "$JAVA_REPO" | \
+                   cut --fields=2                   | \
+                   grep 'refs/tags/'                | \
+                   sed 's|refs/tags/||'             | \
+                   sort --version-sort              | \
+                   grep --before-context=1 -- '-ga' | \
+                   tail --lines=2                   | \
+                   head --lines=1                       )"
       JAVA_TARGET="$JAVA_TAG"
       SUFFIX="ev3"
+
+    # * Tag model:    use latest tag (mini-release)
+    # * Commit model: use latest commit (no guarantee about anything); however use latest tag as the version
+    elif [ "$VERSION_POLICY" == "latest_tag" ] || [ "$VERSION_POLICY" == "latest_commit" ]; then
+      JAVA_TAG="$( git ls-remote --ref "$JAVA_REPO" | \
+                   cut --fields=2                   | \
+                   grep 'refs/tags/'                | \
+                   sed 's|refs/tags/||'             | \
+                   sort --version-sort              | \
+                   grep --invert-match -- '-ga'     | \
+                   tail --lines=1                       )"
+
+      if [ "$VERSION_POLICY" == "latest_tag" ]; then
+        JAVA_TARGET="$JAVA_TAG"
+        SUFFIX="ev3-unreleased"
+      else
+        JAVA_TARGET="master"
+        SUFFIX="ev3-dirty"
+      fi
+
+    else
+      echo "Error: unknown VERSION_POLICY: \"$VERSION_POLICY\". Please fix config.sh." >&2
+      exit 1
     fi
 
     # download it
