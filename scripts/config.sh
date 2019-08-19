@@ -289,20 +289,20 @@ elif [ "$JDKVER" == "tip" ]; then
   PATCHVER="jdk13"
   AUTOGEN_STYLE="v2"
   if [ "$BUILDER_TYPE" = "native" ]; then
-    # dogfooding; I'm not entirely happy with it, but I don't know of other sflt JDK12
+    # stretch and buster have different versions
     HOSTJDK="$BUILDDIR/jdk-ev3"
     HOSTJDK_RENAME_FROM="$BUILDDIR/jdk"
     HOSTJDK_FILE="$BUILDDIR/jdk-ev3.tar.gz"
-    # stretch and buster have different versions
     if [ "$BUILDER_DISTRO" = "stretch" ]; then
       HOSTJDK_URL="https://ci.adoptopenjdk.net/view/ev3dev/job/openjdk12_build_ev3_linux_native/lastSuccessfulBuild/artifact/build/jdk-ev3.tar.gz"
     else
       HOSTJDK_URL="https://ci.adoptopenjdk.net/view/ev3dev/job/openjdk12_build_ev3_linux_native_next/lastSuccessfulBuild/artifact/build/jdk-ev3.tar.gz"
     fi
   else
-    HOSTJDK="$BUILDDIR/jdk-12+33"
-    HOSTJDK_FILE="$BUILDDIR/OpenJDK12U-jdk_x64_linux_hotspot_12_33.tar.gz"
-    HOSTJDK_URL="https://github.com/AdoptOpenJDK/openjdk12-binaries/releases/download/jdk-12%2B33/OpenJDK12U-jdk_x64_linux_hotspot_12_33.tar.gz"
+    # same for both stretch & buster
+    HOSTJDK="$BUILDDIR/jdk-12.0.2+10"
+    HOSTJDK_FILE="$BUILDDIR/OpenJDK12U-jdk_x64_linux_hotspot_12.0.2_10.tar.gz"
+    HOSTJDK_URL="https://github.com/AdoptOpenJDK/openjdk12-binaries/releases/download/jdk-12.0.2%2B10/OpenJDK12U-jdk_x64_linux_hotspot_12.0.2_10.tar.gz"
   fi
   IMAGEDIR="$JDKDIR/build/linux-arm-${JDKVM}-${HOTSPOT_DEBUG}/images"
   HOTSPOT_ABI=arm-sflt
