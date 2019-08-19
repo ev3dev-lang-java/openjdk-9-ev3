@@ -253,7 +253,7 @@ elif [ "$JDKVER" == "13" ]; then
 
 # OpenJDK Master+dev
 elif [ "$JDKVER" == "tip" ]; then
-  VERSION_POLICY="latest_commit"
+  VERSION_POLICY="latest_tag"
   JAVA_SCM="git"
   JAVA_REPO="https://github.com/openjdk/jdk.git"
   PATCHVER="jdk13"
