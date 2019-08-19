@@ -158,9 +158,10 @@ if [ "$JDKVER" == "9" ]; then
     exit 1
   else
     # same for both stretch & buster
-    HOSTJDK="$BUILDDIR/jdk-9.0.4"
-    HOSTJDK_FILE="$BUILDDIR/openjdk-9.0.4_linux-x64_bin.tar.gz"
-    HOSTJDK_URL="https://download.java.net/java/GA/jdk9/9.0.4/binaries/openjdk-9.0.4_linux-x64_bin.tar.gz"
+    # JDK8 is still supported, so let's use that as we can
+    HOSTJDK="$BUILDDIR/jdk8u222-b10"
+    HOSTJDK_FILE="$BUILDDIR/OpenJDK8U-jdk_x64_linux_hotspot_8u222b10.tar.gz"
+    HOSTJDK_URL="https://github.com/AdoptOpenJDK/openjdk8-binaries/releases/download/jdk8u222-b10/OpenJDK8U-jdk_x64_linux_hotspot_8u222b10.tar.gz"
   fi
   IMAGEDIR="$JDKDIR/build/linux-arm-normal-${JDKVM}-${HOTSPOT_DEBUG}/images"
   HOTSPOT_ABI=arm926ejs
