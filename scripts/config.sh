@@ -223,8 +223,34 @@ elif [ "$JDKVER" == "12" ]; then
     SFLT_NEEDED=true
   fi
 
-# OpenJDK 13/Master+dev
-elif [ "$JDKVER" == "13" ] || [ "$JDKVER" == "tip" ]; then
+# OpenJDK 13
+elif [ "$JDKVER" == "13" ]; then
+  # download tip or latest tag
+  JAVA_SCM="git"
+  JAVA_REPO="https://github.com/openjdk/jdk13.git"
+  PATCHVER="jdk13"
+  AUTOGEN_STYLE="v2"
+  if [ "$BUILDER_TYPE" = "native" ]; then
+    # dogfooding; I'm not entirely happy with it, but I don't know of other sflt JDK12
+    HOSTJDK="$BUILDDIR/jdk-ev3"
+    HOSTJDK_RENAME_FROM="$BUILDDIR/jdk"
+    HOSTJDK_FILE="$BUILDDIR/jdk-ev3.tar.gz"
+    HOSTJDK_URL="https://ci.adoptopenjdk.net/view/ev3dev/job/openjdk12_build_ev3_linux_native/lastSuccessfulBuild/artifact/build/jdk-ev3.tar.gz"
+  else
+    HOSTJDK="$BUILDDIR/jdk-12+33"
+    HOSTJDK_FILE="$BUILDDIR/OpenJDK12U-jdk_x64_linux_hotspot_12_33.tar.gz"
+    HOSTJDK_URL="https://github.com/AdoptOpenJDK/openjdk12-binaries/releases/download/jdk-12%2B33/OpenJDK12U-jdk_x64_linux_hotspot_12_33.tar.gz"
+  fi
+  IMAGEDIR="$JDKDIR/build/linux-arm-${JDKVM}-${HOTSPOT_DEBUG}/images"
+  HOTSPOT_ABI=arm-sflt
+  JNI_PATH_FLAGS="--with-jni-libpath=/usr/lib/$DEB_HOST_MULTIARCH/jni:/lib/$DEB_HOST_MULTIARCH:/usr/lib/$DEB_HOST_MULTIARCH:/usr/lib/jni:/lib:/usr/lib"
+  SOFTFLOAT_FLAGS="--with-sflt=$SFLTPFX"
+  if [ "$JDKPLATFORM" == "ev3" ]; then
+    SFLT_NEEDED=true
+  fi
+
+# OpenJDK Master+dev
+elif [ "$JDKVER" == "tip" ]; then
   # download tip or latest tag
   JAVA_SCM="git"
   JAVA_REPO="https://github.com/openjdk/jdk.git"
