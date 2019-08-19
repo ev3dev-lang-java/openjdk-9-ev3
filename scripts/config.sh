@@ -176,9 +176,15 @@ elif [ "$JDKVER" == "10" ]; then
   PATCHVER="jdk10"
   AUTOGEN_STYLE="v1"
   AUTOGEN_PATH="./make/autoconf/autogen.sh"
-  HOSTJDK="$BUILDDIR/jdk-10.0.2"
-  HOSTJDK_FILE="$BUILDDIR/openjdk-10.0.2_linux-x64_bin.tar.gz"
-  HOSTJDK_URL="https://download.java.net/java/GA/jdk10/10.0.2/19aef61b38124481863b1413dce1855f/13/openjdk-10.0.2_linux-x64_bin.tar.gz"
+  if [ "$BUILDER_TYPE" = "native" ]; then
+    echo "Error: native builds are not supported for JDK10." >&2
+    exit 1
+  else
+    # same for both stretch & buster
+    HOSTJDK="$BUILDDIR/jdk-10.0.2"
+    HOSTJDK_FILE="$BUILDDIR/openjdk-10.0.2_linux-x64_bin.tar.gz"
+    HOSTJDK_URL="https://download.java.net/java/GA/jdk10/10.0.2/19aef61b38124481863b1413dce1855f/13/openjdk-10.0.2_linux-x64_bin.tar.gz"
+  fi
   IMAGEDIR="$JDKDIR/build/linux-arm-normal-${JDKVM}-${HOTSPOT_DEBUG}/images"
   HOTSPOT_ABI=arm926ejs
   JNI_PATH_FLAGS=
