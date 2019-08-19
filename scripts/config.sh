@@ -147,6 +147,7 @@ VENDOR_FLAGS="$VENDOR_FLAGS --with-vendor-vm-bug-url=https://github.com/ev3dev-l
 
 # OpenJDK 9
 if [ "$JDKVER" == "9" ]; then
+  VERSION_POLICY="latest_general_availability"
   JAVA_SCM="git"
   JAVA_REPO="https://github.com/AdoptOpenJDK/openjdk-jdk9u.git"
   PATCHVER="jdk9"
@@ -163,6 +164,7 @@ if [ "$JDKVER" == "9" ]; then
 
 # OpenJDK 10
 elif [ "$JDKVER" == "10" ]; then
+  VERSION_POLICY="latest_general_availability"
   JAVA_SCM="git"
   JAVA_REPO="https://github.com/AdoptOpenJDK/openjdk-jdk10u.git"
   PATCHVER="jdk10"
@@ -178,7 +180,7 @@ elif [ "$JDKVER" == "10" ]; then
 
 # OpenJDK 11
 elif [ "$JDKVER" == "11" ]; then
-  # download latest tag
+  VERSION_POLICY="latest_general_availability"
   JAVA_SCM="git"
   JAVA_REPO="https://github.com/openjdk/jdk11u.git"
   PATCHVER="jdk11"
@@ -200,7 +202,7 @@ elif [ "$JDKVER" == "11" ]; then
 
 # OpenJDK 12
 elif [ "$JDKVER" == "12" ]; then
-  # download latest tag
+  VERSION_POLICY="latest_general_availability"
   JAVA_SCM="git"
   JAVA_REPO="https://github.com/openjdk/jdk12u.git"
   PATCHVER="jdk12"
@@ -225,7 +227,7 @@ elif [ "$JDKVER" == "12" ]; then
 
 # OpenJDK 13
 elif [ "$JDKVER" == "13" ]; then
-  # download tip or latest tag
+  VERSION_POLICY="latest_tag"
   JAVA_SCM="git"
   JAVA_REPO="https://github.com/openjdk/jdk13.git"
   PATCHVER="jdk13"
@@ -251,7 +253,7 @@ elif [ "$JDKVER" == "13" ]; then
 
 # OpenJDK Master+dev
 elif [ "$JDKVER" == "tip" ]; then
-  # download tip or latest tag
+  VERSION_POLICY="latest_commit"
   JAVA_SCM="git"
   JAVA_REPO="https://github.com/openjdk/jdk.git"
   PATCHVER="jdk13"
