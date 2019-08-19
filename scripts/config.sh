@@ -227,14 +227,20 @@ elif [ "$JDKVER" == "12" ]; then
   PATCHVER="jdk12"
   AUTOGEN_STYLE="v2"
   if [ "$BUILDER_TYPE" = "native" ]; then
-    # yaay, tested sflt JDK11
-    HOSTJDK="$BUILDDIR/zulu11.31.16-ca-jdk11.0.3-linux_aarch32sf"
-    HOSTJDK_FILE="$BUILDDIR/zulu11.31.16-ca-jdk11.0.3-linux_aarch32sf.tar.gz"
-    HOSTJDK_URL="http://cdn.azul.com/zulu-embedded/bin/zulu11.31.16-ca-jdk11.0.3-linux_aarch32sf.tar.gz"
+    # stretch and buster have different versions
+    HOSTJDK="$BUILDDIR/jdk-ev3"
+    HOSTJDK_RENAME_FROM="$BUILDDIR/jdk"
+    HOSTJDK_FILE="$BUILDDIR/jdk-ev3.tar.gz"
+    if [ "$BUILDER_DISTRO" = "stretch" ]; then
+      HOSTJDK_URL="https://ci.adoptopenjdk.net/view/ev3dev/job/openjdk11_build_ev3_linux_native/lastSuccessfulBuild/artifact/build/jdk-ev3.tar.gz"
+    else
+      HOSTJDK_URL="https://ci.adoptopenjdk.net/view/ev3dev/job/openjdk11_build_ev3_linux_native_next/lastSuccessfulBuild/artifact/build/jdk-ev3.tar.gz"
+    fi
   else
-    HOSTJDK="$BUILDDIR/jdk-11.0.3+7"
-    HOSTJDK_FILE="$BUILDDIR/OpenJDK11U-jdk_x64_linux_hotspot_11.0.3_7.tar.gz"
-    HOSTJDK_URL="https://github.com/AdoptOpenJDK/openjdk11-binaries/releases/download/jdk-11.0.3%2B7/OpenJDK11U-jdk_x64_linux_hotspot_11.0.3_7.tar.gz"
+    # same for both stretch & buster
+    HOSTJDK="$BUILDDIR/jdk-11.0.4+11"
+    HOSTJDK_FILE="$BUILDDIR/OpenJDK11U-jdk_x64_linux_hotspot_11.0.4_11.tar.gz"
+    HOSTJDK_URL="https://github.com/AdoptOpenJDK/openjdk11-binaries/releases/download/jdk-11.0.4%2B11/OpenJDK11U-jdk_x64_linux_hotspot_11.0.4_11.tar.gz"
   fi
   IMAGEDIR="$JDKDIR/build/linux-arm-${JDKVM}-${HOTSPOT_DEBUG}/images"
   HOTSPOT_ABI=arm-sflt
