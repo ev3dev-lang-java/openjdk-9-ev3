@@ -37,6 +37,9 @@ cp "$BUILDDIR/metadata" "jri/metadata";   echo "TYPE=\"jri\""   >>"jri/metadata"
 cp "$BUILDDIR/metadata" "jdk/metadata";   echo "TYPE=\"jdk\""   >>"jdk/metadata"
 cp "$BUILDDIR/metadata" "jmods/metadata"; echo "TYPE=\"jmods\"" >>"jmods/metadata"
 
+# remove jmods from jdk
+rm -rf jdk/jmods
+
 # create zip files
 echo "[ZIP] Creating JRI archive"
 tar -cf - jri   | pigz -9 > "$BUILDDIR/jri-$JDKPLATFORM.tar.gz"
