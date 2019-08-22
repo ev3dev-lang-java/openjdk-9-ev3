@@ -199,14 +199,14 @@ elif [ "$JDKVER" == "11" ]; then
   PATCHVER="jdk11"
   AUTOGEN_STYLE="v2"
   if [ "$BUILDER_TYPE" = "native" ]; then
-    # stretch and buster have different versions
     HOSTJDK="$BUILDDIR/jdk-ev3"
     HOSTJDK_RENAME_FROM="$BUILDDIR/jdk"
     HOSTJDK_FILE="$BUILDDIR/jdk-ev3.tar.gz"
+    # stretch and buster have different versions
     if [ "$BUILDER_DISTRO" = "stretch" ]; then
-      HOSTJDK_URL="https://ci.adoptopenjdk.net/view/ev3dev/job/openjdk11_build_ev3_linux_native/lastSuccessfulBuild/artifact/build/jdk-ev3.tar.gz"
+      HOSTJDK_URL="https://ci.adoptopenjdk.net/job/ev3dev/job/build/job/ev3-stretch-native/job/jdk11/lastSuccessfulBuild/artifact/build/jdk-ev3.tar.gz"
     else
-      HOSTJDK_URL="https://ci.adoptopenjdk.net/view/ev3dev/job/openjdk11_build_ev3_linux_native_next/lastSuccessfulBuild/artifact/build/jdk-ev3.tar.gz"
+      HOSTJDK_URL="https://ci.adoptopenjdk.net/job/ev3dev/job/build/job/ev3-buster-native/job/jdk11/lastSuccessfulBuild/artifact/build/jdk-ev3.tar.gz"
     fi
   else
     # same for both stretch & buster
@@ -227,14 +227,14 @@ elif [ "$JDKVER" == "12" ]; then
   PATCHVER="jdk12"
   AUTOGEN_STYLE="v2"
   if [ "$BUILDER_TYPE" = "native" ]; then
-    # stretch and buster have different versions
     HOSTJDK="$BUILDDIR/jdk-ev3"
     HOSTJDK_RENAME_FROM="$BUILDDIR/jdk"
     HOSTJDK_FILE="$BUILDDIR/jdk-ev3.tar.gz"
+    # stretch and buster have different versions
     if [ "$BUILDER_DISTRO" = "stretch" ]; then
-      HOSTJDK_URL="https://ci.adoptopenjdk.net/view/ev3dev/job/openjdk11_build_ev3_linux_native/lastSuccessfulBuild/artifact/build/jdk-ev3.tar.gz"
+      HOSTJDK_URL="https://ci.adoptopenjdk.net/job/ev3dev/job/build/job/ev3-stretch-native/job/jdk11/lastSuccessfulBuild/artifact/build/jdk-ev3.tar.gz"
     else
-      HOSTJDK_URL="https://ci.adoptopenjdk.net/view/ev3dev/job/openjdk11_build_ev3_linux_native_next/lastSuccessfulBuild/artifact/build/jdk-ev3.tar.gz"
+      HOSTJDK_URL="https://ci.adoptopenjdk.net/job/ev3dev/job/build/job/ev3-buster-native/job/jdk11/lastSuccessfulBuild/artifact/build/jdk-ev3.tar.gz"
     fi
   else
     # same for both stretch & buster
@@ -263,9 +263,9 @@ elif [ "$JDKVER" == "13" ]; then
     HOSTJDK_FILE="$BUILDDIR/jdk-ev3.tar.gz"
     # stretch and buster have different versions
     if [ "$BUILDER_DISTRO" = "stretch" ]; then
-      HOSTJDK_URL="https://ci.adoptopenjdk.net/view/ev3dev/job/openjdk12_build_ev3_linux_native/lastSuccessfulBuild/artifact/build/jdk-ev3.tar.gz"
+      HOSTJDK_URL="https://ci.adoptopenjdk.net/job/ev3dev/job/build/job/ev3-stretch-native/job/jdk12/lastSuccessfulBuild/artifact/build/jdk-ev3.tar.gz"
     else
-      HOSTJDK_URL="https://ci.adoptopenjdk.net/view/ev3dev/job/openjdk12_build_ev3_linux_native_next/lastSuccessfulBuild/artifact/build/jdk-ev3.tar.gz"
+      HOSTJDK_URL="https://ci.adoptopenjdk.net/job/ev3dev/job/build/job/ev3-buster-native/job/jdk12/lastSuccessfulBuild/artifact/build/jdk-ev3.tar.gz"
     fi
   else
     # same for both stretch & buster
@@ -289,14 +289,14 @@ elif [ "$JDKVER" == "tip" ]; then
   PATCHVER="jdk13"
   AUTOGEN_STYLE="v2"
   if [ "$BUILDER_TYPE" = "native" ]; then
-    # stretch and buster have different versions
     HOSTJDK="$BUILDDIR/jdk-ev3"
     HOSTJDK_RENAME_FROM="$BUILDDIR/jdk"
     HOSTJDK_FILE="$BUILDDIR/jdk-ev3.tar.gz"
+    # stretch and buster have different versions
     if [ "$BUILDER_DISTRO" = "stretch" ]; then
-      HOSTJDK_URL="https://ci.adoptopenjdk.net/view/ev3dev/job/openjdk12_build_ev3_linux_native/lastSuccessfulBuild/artifact/build/jdk-ev3.tar.gz"
+      HOSTJDK_URL="https://ci.adoptopenjdk.net/job/ev3dev/job/build/job/ev3-stretch-native/job/jdk12/lastSuccessfulBuild/artifact/build/jdk-ev3.tar.gz"
     else
-      HOSTJDK_URL="https://ci.adoptopenjdk.net/view/ev3dev/job/openjdk12_build_ev3_linux_native_next/lastSuccessfulBuild/artifact/build/jdk-ev3.tar.gz"
+      HOSTJDK_URL="https://ci.adoptopenjdk.net/job/ev3dev/job/build/job/ev3-buster-native/job/jdk12/lastSuccessfulBuild/artifact/build/jdk-ev3.tar.gz"
     fi
   else
     # same for both stretch & buster
