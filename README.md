@@ -7,21 +7,36 @@ Builds for older boards should work on newer boards, the performance might just 
 
 ## Build Status
 
-| OpenJDK version  | Platform | OS             | Type   | VM     | Status                                             |
-|------------------|----------|----------------|--------|--------|----------------------------------------------------|
-| OpenJDK 11       | EV3      | ev3dev-stretch | native | C1 JIT | [![openjdk11_build_ev3_linux_native][1]][2]        |
-| OpenJDK 11       | EV3      | ev3dev-buster  | native | C1 JIT | [![openjdk11_build_ev3_linux_native_next][3]][4]   |
-| OpenJDK 12       | EV3      | ev3dev-buster  | native | C1 JIT | [![openjdk12_build_ev3_linux_native][5]][6]        |
-| OpenJDK 13 (dev) | EV3      | ev3dev-buster  | native | C1 JIT | [![openjdk13_build_ev3_linux_native][7]][8]        |
+| OpenJDK version   | Platform | Type    | VM     | ev3dev-stretch          | ev3dev-buster           |
+|-------------------|----------|---------|--------|-------------------------|-------------------------|
+| OpenJDK 9         | EV3      | x86→ARM | C1 JIT | [archived][archive]     | N/A                     |
+| OpenJDK 10        | EV3      | x86→ARM | C1 JIT | [archived][archive]     | N/A                     |
+| OpenJDK 11        | EV3      | ARM→ARM | C1 JIT | [![-> jenkins][1]][2]   | [![-> jenkins][3]][4]   |
+| OpenJDK 12        | EV3      | ARM→ARM | C1 JIT | [![-> jenkins][5]][6]   | [![-> jenkins][7]][8]   |
+| OpenJDK 13 (ea)   | EV3      | ARM→ARM | C1 JIT | [![-> jenkins][9]][10]  | [![-> jenkins][11]][12] |
+| OpenJDK tip (dev) | EV3      | ARM→ARM | C1 JIT | [![-> jenkins][13]][14] | [![-> jenkins][15]][16] |
 
-[1]: https://ci.adoptopenjdk.net/view/ev3dev/job/openjdk11_build_ev3_linux_native/badge/icon
-[2]: https://ci.adoptopenjdk.net/view/ev3dev/job/openjdk11_build_ev3_linux_native/
-[3]: https://ci.adoptopenjdk.net/view/ev3dev/job/openjdk11_build_ev3_linux_native_next/badge/icon
-[4]: https://ci.adoptopenjdk.net/view/ev3dev/job/openjdk11_build_ev3_linux_native_next/
-[5]: https://ci.adoptopenjdk.net/view/ev3dev/job/openjdk12_build_ev3_linux_native/badge/icon
-[6]: https://ci.adoptopenjdk.net/view/ev3dev/job/openjdk12_build_ev3_linux_native/
-[7]: https://ci.adoptopenjdk.net/view/ev3dev/job/openjdk13_build_ev3_linux_native/badge/icon
-[8]: https://ci.adoptopenjdk.net/view/ev3dev/job/openjdk13_build_ev3_linux_native/
+[1]: https://ci.adoptopenjdk.net/view/ev3dev/job/eljbuild/job/stretch-11/badge/icon
+[2]: https://ci.adoptopenjdk.net/view/ev3dev/job/eljbuild/job/stretch-11/
+[3]: https://ci.adoptopenjdk.net/view/ev3dev/job/eljbuild/job/buster-11/badge/icon
+[4]: https://ci.adoptopenjdk.net/view/ev3dev/job/eljbuild/job/buster-11/
+
+[5]: https://ci.adoptopenjdk.net/view/ev3dev/job/eljbuild/job/stretch-12/badge/icon
+[6]: https://ci.adoptopenjdk.net/view/ev3dev/job/eljbuild/job/stretch-12/
+[7]: https://ci.adoptopenjdk.net/view/ev3dev/job/eljbuild/job/buster-12/badge/icon
+[8]: https://ci.adoptopenjdk.net/view/ev3dev/job/eljbuild/job/buster-12/
+
+[9]: https://ci.adoptopenjdk.net/view/ev3dev/job/eljbuild/job/stretch-13/badge/icon
+[10]: https://ci.adoptopenjdk.net/view/ev3dev/job/eljbuild/job/stretch-13/
+[11]: https://ci.adoptopenjdk.net/view/ev3dev/job/eljbuild/job/buster-13/badge/icon
+[12]: https://ci.adoptopenjdk.net/view/ev3dev/job/eljbuild/job/buster-13/
+
+[13]: https://ci.adoptopenjdk.net/view/ev3dev/job/eljbuild/job/stretch-bleeding/badge/icon
+[14]: https://ci.adoptopenjdk.net/view/ev3dev/job/eljbuild/job/stretch-bleeding/
+[15]: https://ci.adoptopenjdk.net/view/ev3dev/job/eljbuild/job/buster-bleeding/badge/icon
+[16]: https://ci.adoptopenjdk.net/view/ev3dev/job/eljbuild/job/buster-bleeding/
+
+[archive]: https://github.com/ev3dev-lang-java/openjdk-ev3-archive
 
 
 ## Components
