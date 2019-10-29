@@ -1,0 +1,12 @@
+diff --git a/src/hotspot/cpu/arm/vtableStubs_arm.cpp b/src/hotspot/cpu/arm/vtableStubs_arm.cpp
+index 2c564b818..f84e11662 100644
+--- a/src/hotspot/cpu/arm/vtableStubs_arm.cpp
++++ b/src/hotspot/cpu/arm/vtableStubs_arm.cpp
+@@ -32,6 +32,7 @@
+ #include "oops/compiledICHolder.hpp"
+ #include "oops/instanceKlass.hpp"
+ #include "oops/klassVtable.hpp"
++#include "oops/klass.inline.hpp"
+ #include "runtime/sharedRuntime.hpp"
+ #include "vmreg_arm.inline.hpp"
+ #ifdef COMPILER2
