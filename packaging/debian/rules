@@ -18,7 +18,6 @@ dlopen_hl_recommends =
 
 control_vars  = '-Vdlopenhl:Depends=$(dlopen_hl_depends)'
 control_vars += '-Vdlopenhl:Recommends=$(dlopen_hl_recommends)'
-control_vars += '-Vcacert:Depends=ca-certificates-java'
 control_vars += '-Vmountpoint:Depends=util-linux (>= 2.26.2-4)'
 control_vars += '-Vjcommon:Depends=java-common (>= 0.28)'
 control_vars += '-Vdefaultvm:Provides='
@@ -51,9 +50,6 @@ copy_java: binary-pre mkdirs
 	cp -rf bin conf legal lib release metadata debian/$(pkgname)/usr/lib/jvm/$(pkgname)/
 
 mkcustom: binary-pre mkdirs copy_java templates
-	# ca certificates
-	rm debian/$(pkgname)/usr/lib/jvm/$(pkgname)/lib/security/cacerts
-	ln -s /etc/ssl/certs/java/cacerts debian/$(pkgname)/usr/lib/jvm/$(pkgname)/lib/security/cacerts
 	# custom config
 	install -o root -g root -m 0644 debian/nss.cfg debian/$(pkgname)/etc/$(pkgname)/security/nss.cfg
 	install -o root -g root -m 0644 debian/jvm.cfg debian/$(pkgname)/etc/$(pkgname)/jvm.cfg
@@ -72,7 +68,6 @@ mkcustom: binary-pre mkdirs copy_java templates
 	        conf/logging.properties \
 	        conf/net.properties \
 	        conf/sound.properties \
-	        lib/security/cacerts \
 	        lib/security/blacklisted.certs \
 	        lib/security/default.policy \
 	        lib/security/public_suffix_list.dat \
