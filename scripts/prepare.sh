@@ -33,3 +33,12 @@ if [ ! -d "$JTREG" ]; then
 else
   echo "[PREPARE] Using cached jtreg directory"
 fi
+
+if [ ! -f "$CACERTFILE" ]; then
+  echo "[PREPARE] Generating CA certificate database"
+  cd "$BUILDDIR"
+  wget -nv -N https://github.com/use-sparingly/keyutil/releases/download/0.4.0/keyutil-0.4.0.jar
+  wget -nv -N https://raw.githubusercontent.com/curl/curl/master/lib/mk-ca-bundle.pl
+  perl mk-ca-bundle.pl ca-bundle.crt
+  "$HOSTJDK/bin/java" -jar keyutil-0.4.0.jar --import --new-keystore "$CACERTFILE" --password changeit --force-new-overwrite --import-pem-file ca-bundle.crt
+fi

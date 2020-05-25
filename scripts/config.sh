@@ -6,12 +6,8 @@ SCRIPTDIR="$( cd "$(dirname "$0")" ; pwd -P )"
 BUILDDIR="/build"
 # jdk repository directory
 JDKDIR="$BUILDDIR/jdk"
-# openjdk-build repo dir
-ABLDDIR="$BUILDDIR/openjdk-build"
-# openjdk-build repo
-ABLDREPO="https://github.com/AdoptOpenJDK/openjdk-build.git"
-# cacertfile
-CACERTFILE="$ABLDDIR/security/cacerts"
+# CA certificate database
+CACERTFILE="$BUILDDIR/cacerts"
 # hg tarball
 JAVA_TMP="$BUILDDIR/jdk_tmp"
 TARBALL_MAX_DOWNLOADS=10
