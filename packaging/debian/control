@@ -13,8 +13,7 @@ Package: @@package@@
 Architecture: armel
 Multi-Arch: same
 Pre-Depends: ${dpkg:Depends}
-Depends: ${cacert:Depends},
-  ${jcommon:Depends}, ${dlopenhl:Depends},
+Depends: ${jcommon:Depends}, ${dlopenhl:Depends},
   ${mountpoint:Depends},
   ${shlibs:Depends}, ${misc:Depends}
 Recommends: ${dlopenhl:Recommends}
