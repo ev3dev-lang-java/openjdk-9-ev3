@@ -157,12 +157,3 @@ if [ ! -d "$JDKDIR" ]; then
 else
   echo "[FETCH] Directory for JDK repository exists, assuming everything has been done already." 2>&1
 fi
-
-
-if [ -d "$ABLDDIR" ]; then
-  rm -rf "$ABLDDIR"
-fi
-
-# clone the root project
-echo "[FETCH] Cloning openjdk-build repo"
-git clone --depth 1 "$ABLDREPO" "$ABLDDIR"

@@ -27,7 +27,6 @@ fi
 #   - Force softfloat runtime:  -D__SOFTFP__
 # Fix the "internal" string:   --with-version-string="<version>"
 # Use correct JNI path:        --with-jni-libpath=<dir1>:<dir2>...
-# Use AdoptOpenJDK CA certs:   --with-cacerts-file=<path>
 # Use correct debug level      --with-debug-level=<level>
 # Help to find freetype:       --with-freetype-lib=/usr/lib/arm-linux-gnueabi
 #                              --with-freetype-include=/usr/include
@@ -58,7 +57,6 @@ if [ "$JDKPLATFORM" == "ev3" ]; then
                    --with-version-string="$JAVA_VERSION" \
                    $JNI_PATH_FLAGS \
                    $VENDOR_FLAGS \
-                   --with-cacerts-file="$CACERTFILE" \
                    --with-debug-level=$HOTSPOT_DEBUG \
                    --with-native-debug-symbols=internal \
                    --with-stdc++lib=dynamic \
