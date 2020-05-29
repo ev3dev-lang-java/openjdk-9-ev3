@@ -66,3 +66,5 @@ debuild -b -us -uc --no-sign --buildinfo-option="-O"
 cd /build
 rm -rf "$PKGDIR"
 rm -rf "$PKGDIR.orig.tar.xz"
+
+ln -s "pkg/${PKGNAME}${JAVA_PACKAGE_REVISION}_armel.deb" "/build/jri-for-test.deb"
