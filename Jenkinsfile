@@ -20,6 +20,7 @@ node(selector) {
     def osImage
     def bldImage
     def pkgImage
+    def tstImage
 
     // prepare run parameters
     String mountParams = "-v ${env.WORKSPACE}/build:/build"
@@ -43,6 +44,7 @@ node(selector) {
             osImage  = docker.build("ev3dev-lang-java:jdk-${params.BUILD_TYPE}-${params.DEBIAN}",  "${infoArg}  -f ${env.WORKSPACE}/system/Dockerfile.${params.BUILD_TYPE}  ${env.WORKSPACE}/system")
             bldImage = docker.build("ev3dev-lang-java:jdk-${params.BUILD_TYPE}-build",             "${infoArg}                                                              ${env.WORKSPACE}/scripts")
             pkgImage = docker.build("ev3dev-lang-java:jdk-package",                                "${infoArg}                                                              ${env.WORKSPACE}/packaging")
+            tstImage = docker.build("ev3dev-lang-java:jdk-minitest",                               "${infoArg}                                                              ${env.WORKSPACE}/minitest")
         }
         stage("JDK download") {
             bldImage.inside("${mountParams} ${envParams}") {
@@ -74,9 +76,18 @@ node(selector) {
             archiveArtifacts artifacts: "build/pkg/*", fingerprint: false
         }
 
+        stage("JRI minitest") {
+            tstImage.inside("${mountParams} ${envParams}") {
+                sh "/opt/jdktest/autorun.sh"
+            }
+        }
+
     } finally {
         stage ('Cleanup') {
             // clean up workspace
+            tstImage.inside("${mountParams}") {
+                try { sh "sudo rm -rf /build/*" } catch(err) {}
+            }
             pkgImage.inside("${mountParams}") {
                 try { sh "sudo rm -rf /build/*" } catch(err) {}
             }
@@ -86,6 +97,7 @@ node(selector) {
             try { sh "rm -rf ${env.WORKSPACE}/build" } catch(err) {}
 
             // clean up docker images
+            try { sh "docker rmi ${tstImage.id} 2>/dev/null" } catch (err) {}
             try { sh "docker rmi ${pkgImage.id} 2>/dev/null" } catch (err) {}
             try { sh "docker rmi ${bldImage.id} 2>/dev/null" } catch (err) {}
             try { sh "docker rmi ${osImage.id}  2>/dev/null"  } catch (err) {}
